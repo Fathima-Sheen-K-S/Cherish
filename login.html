@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reverse Matrimony - Login</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    .form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(255, 192, 203, 0.4);
+  width: 100%;
+  max-width: 400px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.3);
+}
+
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to bottom right, #ffe6f0, #fff0f5);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .form-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(255, 192, 203, 0.4);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d63384;
+      margin-bottom: 1.5rem;
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.6rem;
+      border: 1px solid #f8c5d9;
+      border-radius: 8px;
+      background: #fff9fb;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.7rem;
+      width: 100%;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff85c1;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+
+    a {
+      color: #d63384;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = Object.fromEntries(new FormData(this));
+      const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      alert(await res.text());
+    });
+  </script>
+</body>
+</html>
