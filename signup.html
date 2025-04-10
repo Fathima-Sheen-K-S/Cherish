@@ -113,8 +113,24 @@
         <option value="any">Any</option>
       </select>
 
-      <input type="number" name="ageMin" placeholder="Looking for age (min)" required />
-      <input type="number" name="ageMax" placeholder="Looking for age (max)" required />
+      <input 
+  type="text" 
+  name="ageMin" 
+  placeholder="Looking for age (min)" 
+  pattern="\d*" 
+  inputmode="numeric" 
+  required 
+/>
+
+<input 
+  type="text" 
+  name="ageMax" 
+  placeholder="Looking for age (max)" 
+  pattern="\d*" 
+  inputmode="numeric" 
+  required 
+/>
+
 
       <button type="submit">Sign Up</button>
     </form>
