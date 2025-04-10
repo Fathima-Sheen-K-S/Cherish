@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cherish - Vertical Scroll</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      scroll-behavior: smooth;
+      font-family: 'Playfair Display', serif;
+    }
+
+    body {
+      overflow-y: scroll;
+    }
+
+    .section {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Section 1 */
+    .hero {
+      background-color: #ebc9d9;
+    }
+
+    .hero h1 {
+      font-size: 5rem;
+      font-family: 'Cinzel', serif;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-family: 'Brush Script MT', cursive;
+      margin-top: 1rem;
+    }
+
+    .register-btn {
+      margin-top: 2rem;
+      background: #000;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .register-btn:hover {
+      background-color: #444;
+    }
+
+    /* Section 2 */
+    .quote1 {
+      background-color: #fdeaff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote1 p {
+      font-size: 2rem;
+      font-style: italic;
+      color: #62003c;
+    }
+
+    .quote-images,
+    .quote-images-right {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      transition: transform 0.2s ease-out;
+    }
+
+    .quote-images img,
+    .quote-images-right img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Section 3 */
+    .quote2 {
+      background-color: #fff0f7;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote2 p {
+      font-size: 2rem;
+      font-style: italic;
+      color: #8c005a;
+    }
+
+    /* Section 4 - Why Choose Cherish */
+    .why-choose {
+      background: linear-gradient(135deg, #fff3fb, #ffe6f3);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+
+    .why-choose.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .why-choose h2 {
+      font-size: 2.5rem;
+      color: #2c003e;
+      margin-bottom: 2rem;
+    }
+
+    .why-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 1000px;
+    }
+
+    .feature-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 260px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature-box h3 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .feature-box p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+
+    /* Section 5 */
+    .about {
+      background-color: #000;
+      color: white;
+    }
+
+    .about h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .about p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Section 1 -->
+  <section class="section hero">
+    <h1>CHERISH</h1>
+    <h2>Every Connection</h2>
+    <a href="#" class="register-btn">Register Now</a>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="section quote1" id="quoteSection">
+    <p>"Love doesn’t make the world go round.<br>Love is what makes the ride worthwhile."</p>
+    <p>– Franklin P. Jones</p>
+
+    <div class="quote-images" id="quoteImages">
+      <img src="img1.png" alt="Love 1">
+      <img src="img2.png" alt="Love 2">
+      <img src="img3.png" alt="Love 3">
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="section quote2" id="quoteSection2">
+    <p>"One match, endless moments."</p>
+
+    <div class="quote-images-right" id="quoteImages2">
+      <img src="img4.png" alt="Cherish 1">
+      <img src="img5.png" alt="Cherish 2">
+      <img src="img6.png" alt="Cherish 3">
+    </div>
+  </section>
+
+  <!-- Section 4 - Why Choose Cherish -->
+  <section class="section why-choose" id="whyChoose">
+    <h2>Why Choose Cherish?</h2>
+    <div class="why-features">
+      <div class="feature-box">
+        <h3>🔁 Reverse Matching</h3>
+        <p>You describe your dream match and let people apply to you – it’s all about your preferences.</p>
+      </div>
+      <div class="feature-box">
+        <h3>🏳️‍🌈 LGBTQ+ Friendly</h3>
+        <p>We proudly support all orientations. Choose who you're interested in during registration.</p>
+      </div>
+      <div class="feature-box">
+        <h3>🧠 Fun Personality Tests</h3>
+        <p>Engage with interesting quizzes and challenges to help find emotionally compatible partners.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5 - About -->
+  <section class="section about">
+    <h2>@ Cherish 2025</h2>
+    <p>
+      Cherish is not just a matrimony platform — it’s a celebration of soulful connections, shared dreams, and beautiful beginnings. 
+      Created with care and love in 2025, we believe every story deserves a magical start. 💖
+    </p>
+  </section>
+
+  <script>
+    const quoteSection1 = document.getElementById('quoteSection');
+    const quoteImages1 = document.getElementById('quoteImages');
+    const quoteSection2 = document.getElementById('quoteSection2');
+    const quoteImages2 = document.getElementById('quoteImages2');
+    const whyChoose = document.getElementById('whyChoose');
+
+    window.addEventListener('scroll', () => {
+      const winHeight = window.innerHeight;
+
+      // Section 2: right-to-left scroll effect
+      const rect1 = quoteSection1.getBoundingClientRect();
+      if (rect1.top < winHeight && rect1.bottom > 0) {
+        const scrollPercent1 = (winHeight - rect1.top) / (winHeight + rect1.height);
+        const moveX1 = 100 - (scrollPercent1 * 200);
+        quoteImages1.style.transform = `translateX(${moveX1}%)`;
+      }
+
+      // Section 3: left-to-right scroll effect
+      const rect2 = quoteSection2.getBoundingClientRect();
+      if (rect2.top < winHeight && rect2.bottom > 0) {
+        const scrollPercent2 = (winHeight - rect2.top) / (winHeight + rect2.height);
+        const moveX2 = -100 + (scrollPercent2 * 200);
+        quoteImages2.style.transform = `translateX(${moveX2}%)`;
+      }
+
+      // Section 4: fade in when visible
+      const rect3 = whyChoose.getBoundingClientRect();
+      if (rect3.top < winHeight - 100) {
+        whyChoose.classList.add('visible');
+      }
+    });
+  </script>
+
+</body>
+</html>
