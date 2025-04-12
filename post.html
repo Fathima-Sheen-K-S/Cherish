@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Partner Requirement - Cherish</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #ffe6f0, #fff0f5);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(255, 192, 203, 0.4);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #d63384;
+      margin-bottom: 1.5rem;
+    }
+
+    textarea, input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #f8c5d9;
+      background: #fff9fb;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff85c1;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Create Your Post</h2>
+    <form method="POST" action="submit_post.php">
+      <input type="text" name="title" placeholder="Title for your post" required />
+      <textarea name="traits" rows="3" placeholder="Ideal personality traits (e.g., kind, funny, etc.)" required></textarea>
+      <textarea name="lifestyle" rows="3" placeholder="Lifestyle preferences (e.g., loves travel, non-smoker, etc.)" required></textarea>
+      <input type="text" name="question1" placeholder="Fun Question 1 (optional)" />
+      <input type="text" name="question2" placeholder="Fun Question 2 (optional)" />
+      <button type="submit">Submit Post</button>
+    </form>
+  </div>
+</body>
+</html>

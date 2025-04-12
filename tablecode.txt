@@ -1,0 +1,40 @@
+CREATE DATABASE project;
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  gender ENUM('Male', 'Female', 'Other') NOT NULL,
+  looking_for ENUM('Male', 'Female', 'Other') NOT NULL,
+  looking_for_age_min INT NOT NULL,
+  looking_for_age_max INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sample table for post
+
+CREATE TABLE posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  title VARCHAR(255),
+  traits TEXT,
+  lifestyle TEXT,
+  fun_question1 VARCHAR(255),
+  fun_question2 VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
