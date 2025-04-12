@@ -1,5 +1,5 @@
 # 💖 Cherish Every connection 
-Let love find you.
+### Let love find you.
 
 Cherish is an inclusive and modern Reverse Matrimony platform where users create detailed "Partner Requirement" posts instead of browsing others’ profiles. Interested candidates can apply to these posts, making the matchmaking process more empowering, engaging, and personalized.
 
