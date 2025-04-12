@@ -10,3 +10,31 @@ CREATE TABLE users (
   looking_for_age_max INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sampl table for post
+
+CREATE TABLE posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  title VARCHAR(255),
+  traits TEXT,
+  lifestyle TEXT,
+  fun_question1 VARCHAR(255),
+  fun_question2 VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
