@@ -43,7 +43,7 @@ $user = $userQuery->get_result()->fetch_assoc();
     <h1 class="text-2xl font-bold text-pink-600">Cherish</h1>
     <nav class="space-x-4 text-sm">
       <a href="dashboard.php" class="text-pink-700 font-medium">Dashboard</a>
-      <a href="create_post.html" class="text-gray-700 hover:text-pink-600">Create Post</a>
+      <a href="post.html" class="text-gray-700 hover:text-pink-600">Create Post</a>
       <a href="my_posts.php" class="text-gray-700 hover:text-pink-600">My Posts</a>
       <a href="logout.php" class="text-gray-500 hover:text-pink-400">Logout</a>
     </nav>
