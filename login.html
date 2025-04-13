@@ -79,22 +79,14 @@
     a:hover {
       text-decoration: underline;
     }
-
-    .error-message {
-      color: red;
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
   </style>
 </head>
 <body>
   <div class="form-container">
     <h2>Login</h2>
     <form id="loginForm">
-      <input type="email" name="email" id="email" placeholder="Email" required />
-      <input type="password" name="password" id="password" placeholder="Password" required />
-      <div class="error-message" id="error"></div>
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
       <button type="submit">Login</button>
     </form>
     <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
@@ -102,39 +94,42 @@
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
+  e.preventDefault();
 
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
-      const errorDiv = document.getElementById('error');
+  // Collect form data
+  const formData = Object.fromEntries(new FormData(this));
+  console.log("Form Data:", formData); // Log the form data
 
-      // Email regex: basic pattern
-      const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-
-      // Password regex: Minimum 8 characters, at least one uppercase, one lowercase, and one digit
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-
-      if (!emailRegex.test(email)) {
-        errorDiv.textContent = "Please enter a valid email address.";
-        return;
-      }
-
-      if (!passwordRegex.test(password)) {
-        errorDiv.textContent = "Password must be at least 8 characters, include an uppercase letter, lowercase letter, and a number.";
-        return;
-      }
-
-      errorDiv.textContent = ""; // Clear errors
-
-      const formData = Object.fromEntries(new FormData(this));
-      const res = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      alert(await res.text());
+  try {
+    // Send the request
+    const res = await fetch('login.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
     });
+
+    // Check if the response status is OK
+    if (!res.ok) {
+      throw new Error('Network response was not ok.');
+    }
+
+    // Parse the JSON response
+    const data = await res.json();
+    console.log("Response Data:", data); // Log the response data
+
+    // Check the response status
+    if (data.status === 'success') {
+      alert(data.message);
+      window.location.href = 'view.html'; // Redirect on successful login
+    } else {
+      alert(data.message); // Show the error message returned from PHP
+    }
+  } catch (err) {
+    console.error('Login error:', err);
+    alert('Something went wrong. Please try again later.'); // Generic error message
+  }
+});
+
   </script>
 </body>
 </html>
