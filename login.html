@@ -7,21 +7,6 @@
     * {
       box-sizing: border-box;
     }
-    .form-container {
-  background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(255, 192, 203, 0.4);
-  width: 100%;
-  max-width: 400px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-container:hover {
-  transform: scale(1.02);
-  box-shadow: 0 8px 30px rgba(255, 105, 180, 0.3);
-}
-
 
     body {
       display: flex;
@@ -40,6 +25,12 @@
       box-shadow: 0 4px 20px rgba(255, 192, 203, 0.4);
       width: 100%;
       max-width: 400px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 30px rgba(255, 105, 180, 0.3);
     }
 
     h2 {
@@ -103,15 +94,42 @@
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const formData = Object.fromEntries(new FormData(this));
-      const res = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      alert(await res.text());
+  e.preventDefault();
+
+  // Collect form data
+  const formData = Object.fromEntries(new FormData(this));
+  console.log("Form Data:", formData); // Log the form data
+
+  try {
+    // Send the request
+    const res = await fetch('login.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
     });
+
+    // Check if the response status is OK
+    if (!res.ok) {
+      throw new Error('Network response was not ok.');
+    }
+
+    // Parse the JSON response
+    const data = await res.json();
+    console.log("Response Data:", data); // Log the response data
+
+    // Check the response status
+    if (data.status === 'success') {
+      alert(data.message);
+      window.location.href = 'view.html'; // Redirect on successful login
+    } else {
+      alert(data.message); // Show the error message returned from PHP
+    }
+  } catch (err) {
+    console.error('Login error:', err);
+    alert('Something went wrong. Please try again later.'); // Generic error message
+  }
+});
+
   </script>
 </body>
 </html>
