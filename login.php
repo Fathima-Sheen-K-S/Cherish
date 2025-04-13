@@ -5,7 +5,7 @@ header('Content-Type: application/json'); // Ensure the response is JSON
 $servername = "localhost";  // Your MySQL server (usually localhost)
 $username = "root";         // Your MySQL username
 $password = "";             // Your MySQL password
-$dbname = "your_database";  // Your database name (replace with your actual database name)
+$dbname = "project";        // Your database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -40,7 +40,6 @@ if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
     
     // Verify password (assuming the password is stored in plain text)
-    // For production, use password_hash() and password_verify() for better security
     if ($user['password'] === $password) {
         echo json_encode([
             'status' => 'success',
