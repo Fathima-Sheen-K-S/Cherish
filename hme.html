@@ -49,8 +49,13 @@
       margin-top: 1rem;
     }
 
-    .register-btn {
+    .button-group {
+      display: flex;
+      gap: 1rem;
       margin-top: 2rem;
+    }
+
+    .register-btn {
       background: #000;
       color: white;
       padding: 0.8rem 1.8rem;
@@ -63,6 +68,16 @@
 
     .register-btn:hover {
       background-color: #444;
+    }
+
+    .login-btn {
+      background-color: #fff;
+      color: #000;
+      border: 2px solid #000;
+    }
+
+    .login-btn:hover {
+      background-color: #eee;
     }
 
     .quote1 {
@@ -158,7 +173,6 @@
       font-size: 1rem;
     }
 
-    /* Footer Section */
     .footer {
       background-color: #111;
       color: #fff;
@@ -244,7 +258,10 @@
   <section class="section hero">
     <h1>CHERISH</h1>
     <h2>Every Connection</h2>
-    <a href="signup.html" class="register-btn">Create Account</a>
+    <div class="button-group">
+      <a href="signup.html" class="register-btn">Create Account</a>
+      <a href="login.html" class="register-btn login-btn">Login</a>
+    </div>
   </section>
 
   <!-- Section 2 -->
