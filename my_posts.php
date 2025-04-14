@@ -50,9 +50,9 @@ $result = $conn->query("SELECT * FROM posts WHERE user_id = $user_id ORDER BY cr
         .post h3 {
             color: #d63384;
         }
-        .delete-btn {
+        .delete-btn,
+        .edit-btn {
             color: white;
-            background: #ff4d6d;
             padding: 6px 12px;
             border: none;
             border-radius: 6px;
@@ -61,8 +61,18 @@ $result = $conn->query("SELECT * FROM posts WHERE user_id = $user_id ORDER BY cr
             display: inline-block;
             text-decoration: none;
         }
+        .delete-btn {
+            background: #ff4d6d;
+        }
         .delete-btn:hover {
             background: #ff6f91;
+        }
+        .edit-btn {
+            background: #6f42c1;
+            margin-left: 10px;
+        }
+        .edit-btn:hover {
+            background: #7b4dd8;
         }
     </style>
 </head>
@@ -80,6 +90,7 @@ $result = $conn->query("SELECT * FROM posts WHERE user_id = $user_id ORDER BY cr
                 <p><strong>Fun Q2:</strong> <?= htmlspecialchars($post['fun_question2']) ?></p>
             <?php endif; ?>
             <a class="delete-btn" href="?delete=<?= $post['id'] ?>" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+            <a class="edit-btn" href="edit_post.php?id=<?= $post['id'] ?>">Edit</a>
         </div>
     <?php endwhile; ?>
 </body>
