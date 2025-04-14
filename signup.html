@@ -91,8 +91,7 @@
 <body>
   <div class="form-container">
     <h2>Sign Up</h2>
-    <form id="signupForm" method="POST" action="signup.php">
-
+    <form id="signupForm">
       <input type="text" name="name" placeholder="Full Name" required />
 
       <input type="email" name="email" placeholder="Email" required id="emailInput" />
@@ -114,21 +113,21 @@
       </select>
 
       <input 
-        type="text" 
+        type="number" 
         name="ageMin" 
         placeholder="Looking for age (min)" 
-        pattern="\d*" 
-        inputmode="numeric" 
+        min="18"
         required 
+        id="ageMin"
       />
 
       <input 
-        type="text" 
+        type="number" 
         name="ageMax" 
         placeholder="Looking for age (max)" 
-        pattern="\d*" 
-        inputmode="numeric" 
+        min="18"
         required 
+        id="ageMax"
       />
 
       <div class="error-message" id="errorMessage"></div>
@@ -142,28 +141,45 @@
     const form = document.getElementById('signupForm');
     const emailInput = document.getElementById('emailInput');
     const passwordInput = document.getElementById('passwordInput');
+    const ageMinInput = document.getElementById('ageMin');
+    const ageMaxInput = document.getElementById('ageMax');
     const errorMessage = document.getElementById('errorMessage');
 
     form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Always stop form first
+
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
+      const ageMin = parseInt(ageMinInput.value.trim(), 10);
+      const ageMax = parseInt(ageMaxInput.value.trim(), 10);
 
       const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
       if (!emailRegex.test(email)) {
-        event.preventDefault();
         errorMessage.textContent = "Please enter a valid email address.";
         return;
       }
 
       if (!passwordRegex.test(password)) {
-        event.preventDefault();
         errorMessage.textContent = "Password must be at least 8 characters long and include uppercase, lowercase, and a number.";
         return;
       }
 
+      if (isNaN(ageMin) || isNaN(ageMax) || ageMin > ageMax) {
+        errorMessage.textContent = "Please enter a valid age range (min ≤ max).";
+        return;
+      }
+
       errorMessage.textContent = "";
+
+      // Simulate successful registration
+      alert("Registration successful!");
+
+      // Redirect to login after 1 second
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1000);
     });
   </script>
 </body>
