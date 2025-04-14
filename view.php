@@ -58,6 +58,7 @@ $user = $userQuery->get_result()->fetch_assoc();
     <div class="flex flex-col md:flex-row gap-4">
       <a href="post.html" class="bg-pink-600 text-white px-6 py-2 rounded-full hover:bg-pink-700 text-center">+ Create Post</a>
       <a href="my_posts.php" class="bg-white border border-pink-600 text-pink-600 px-6 py-2 rounded-full hover:bg-pink-50 text-center">View My Posts</a>
+      <a href="my_replies.php" class="bg-white border border-pink-600 text-pink-600 px-6 py-2 rounded-full hover:bg-pink-50 text-center">View My Replies</a>
     </div>
   </main>
 
