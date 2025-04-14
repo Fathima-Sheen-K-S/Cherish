@@ -19,7 +19,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Fetch others' posts
-$result = $conn->query("SELECT posts.*, users.name FROM posts JOIN users ON posts.user_id = users.id WHERE posts.user_id != $user_id ORDER BY created_at DESC");
+$result = $conn->query("SELECT posts.*, users.name, users.id AS user_id FROM posts JOIN users ON posts.user_id = users.id WHERE posts.user_id != $user_id ORDER BY created_at DESC");
 ?>
 
 <!DOCTYPE html>
@@ -87,6 +87,19 @@ $result = $conn->query("SELECT posts.*, users.name FROM posts JOIN users ON post
             font-size: 14px;
             color: #555;
         }
+        
+        .connect-btn {
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .connect-btn:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
@@ -113,18 +126,10 @@ $result = $conn->query("SELECT posts.*, users.name FROM posts JOIN users ON post
             <?php endif; ?>
             <?php if ($post['fun_question2']): ?>
                 <p><strong>Fun Q2:</strong> <?= htmlspecialchars($post['fun_question2']) ?></p>
-                <form method="POST" action="apply.php" style="margin-top: 10px;">
-    <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
-    <button type="submit" style="
-        padding: 8px 16px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        ">Apply</button>
-</form>
-
+                <form method="GET" action="profile.php" style="margin-top: 10px;">
+                    <input type="hidden" name="user_id" value="<?= $post['user_id'] ?>">
+                    <button type="submit" class="connect-btn">Connect</button>
+                </form>
             <?php endif; ?>
         </div>
     <?php endwhile; ?>
