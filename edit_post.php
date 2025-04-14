@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border: 1px solid #ccc;
         }
         .submit-btn {
-            background: #6f42c1;
+            background: #d63384;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cursor: pointer;
         }
         .submit-btn:hover {
-            background: #7b4dd8;
+            background: #d63384;
         }
     </style>
 </head>
