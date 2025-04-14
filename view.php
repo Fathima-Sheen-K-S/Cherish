@@ -42,7 +42,7 @@ $user = $userQuery->get_result()->fetch_assoc();
   <header class="bg-white shadow-md p-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold text-pink-600">Cherish</h1>
     <nav class="space-x-4 text-sm">
-      <a href="dashboard.php" class="text-pink-700 font-medium">Dashboard</a>
+      <a href="view.php" class="text-pink-700 font-medium">Dashboard</a>
       <a href="post.html" class="text-gray-700 hover:text-pink-600">Create Post</a>
       <a href="my_posts.php" class="text-gray-700 hover:text-pink-600">My Posts</a>
       <a href="browse_post.php" class="text-gray-700 hover:text-pink-600">Browse Posts</a>
