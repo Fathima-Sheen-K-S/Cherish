@@ -32,10 +32,29 @@
       align-items: center;
       text-align: center;
       padding: 2rem;
+      position: relative;
     }
 
     .hero {
-      background-color: #ebc9d9;
+      background-color: #000;
+      overflow: hidden;
+      color: white;
+    }
+
+    .hero-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.8;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
@@ -50,9 +69,10 @@
     }
 
     .button-group {
+      margin-top: 2rem;
       display: flex;
       gap: 1rem;
-      margin-top: 2rem;
+      justify-content: center;
     }
 
     .register-btn {
@@ -64,20 +84,11 @@
       text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
+      border: 2px solid white;
     }
 
     .register-btn:hover {
       background-color: #444;
-    }
-
-    .login-btn {
-      background-color: #fff;
-      color: #000;
-      border: 2px solid #000;
-    }
-
-    .login-btn:hover {
-      background-color: #eee;
     }
 
     .quote1 {
@@ -173,6 +184,7 @@
       font-size: 1rem;
     }
 
+    /* Footer Section */
     .footer {
       background-color: #111;
       color: #fff;
@@ -254,13 +266,20 @@
 </head>
 <body>
 
-  <!-- Section 1 -->
+  <!-- Hero Section with Video -->
   <section class="section hero">
-    <h1>CHERISH</h1>
-    <h2>Every Connection</h2>
-    <div class="button-group">
-      <a href="signup.html" class="register-btn">Create Account</a>
-      <a href="login.html" class="register-btn login-btn">Login</a>
+    <video autoplay muted loop playsinline class="hero-bg-video">
+      <source src="your-video.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <div class="hero-content">
+      <h1>CHERISH</h1>
+      <h2>Every Connection</h2>
+      <div class="button-group">
+        <a href="signup.html" class="register-btn">Create Account</a>
+        <a href="login.html" class="register-btn">Login</a>
+      </div>
     </div>
   </section>
 
@@ -290,7 +309,7 @@
     <h2>Why Choose Cherish?</h2>
     <div class="why-features">
       <div class="feature-box">
-        <h3> Reverse Matching</h3>
+        <h3>Reverse Matching</h3>
         <p>You describe your dream match and let people apply to you – it’s all about your preferences.</p>
       </div>
       <div class="feature-box">
