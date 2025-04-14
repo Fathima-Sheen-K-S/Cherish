@@ -44,7 +44,7 @@ $result = $conn->query($sql);
     <table>
         <tr>
             <th>ID</th><th>User</th><th>Title</th><th>Traits</th><th>Lifestyle</th>
-            <th>Q1</th><th>Q2</th><th>Posted On</th>
+            <th>Q1</th><th>Q2</th><th>Posted On</th><th>Action</th>
         </tr>
         <?php while ($row = $result->fetch_assoc()): ?>
         <tr>
@@ -56,6 +56,13 @@ $result = $conn->query($sql);
             <td><?= htmlspecialchars($row['fun_question1']) ?></td>
             <td><?= htmlspecialchars($row['fun_question2']) ?></td>
             <td><?= $row['created_at'] ?></td>
+            <td>
+                <!-- Delete button -->
+                <form action="delete_post.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                    <input type="hidden" name="post_id" value="<?= $row['id'] ?>">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this post?');">Delete</button>
+                </form>
+            </td>
         </tr>
         <?php endwhile; ?>
     </table>
