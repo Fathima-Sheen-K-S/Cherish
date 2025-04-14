@@ -45,6 +45,7 @@ $user = $userQuery->get_result()->fetch_assoc();
       <a href="dashboard.php" class="text-pink-700 font-medium">Dashboard</a>
       <a href="post.html" class="text-gray-700 hover:text-pink-600">Create Post</a>
       <a href="my_posts.php" class="text-gray-700 hover:text-pink-600">My Posts</a>
+      <a href="browse_post.php" class="text-gray-700 hover:text-pink-600">Browse Posts</a>
       <a href="logout.php" class="text-gray-500 hover:text-pink-400">Logout</a>
     </nav>
   </header>
