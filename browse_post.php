@@ -93,7 +93,7 @@ $result = $conn->query("SELECT posts.*, users.name FROM posts JOIN users ON post
     <header>
         <h1>Cherish</h1>
         <nav>
-            <a href="dashboard.php">Dashboard</a>
+            <a href="view.php">Dashboard</a>
             <a href="post.html">Create Post</a>
             <a href="my_posts.php">My Posts</a>
             <a href="browse_post.php">Browse Posts</a>
