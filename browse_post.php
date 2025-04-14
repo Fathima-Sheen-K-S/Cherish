@@ -122,7 +122,7 @@ $result = $conn->query("SELECT posts.*, users.name FROM posts JOIN users ON post
         border: none;
         border-radius: 6px;
         cursor: pointer;
-    ">Apply</button>
+        ">Apply</button>
 </form>
 
             <?php endif; ?>
