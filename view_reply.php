@@ -21,11 +21,11 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];  // Make sure to use 'user_id'
 
-// Fetch user data from 'users' table
-$userQuery = $conn->prepare("SELECT name, email FROM users WHERE id = ?");
-$userQuery->bind_param("i", $user_id);
-$userQuery->execute();
-$user = $userQuery->get_result()->fetch_assoc();
+// Fetch user replies (assuming 'sender_id' is the user you're interested in)
+$messagesQuery = $conn->prepare("SELECT m.reply_q1, m.reply_q2, m.comments, m.created_at, u.name AS receiver_name FROM messages m JOIN users u ON m.receiver_id = u.id WHERE m.sender_id = ?");
+$messagesQuery->bind_param("i", $user_id);
+$messagesQuery->execute();
+$messagesResult = $messagesQuery->get_result();
 
 ?>
 
@@ -33,7 +33,7 @@ $user = $userQuery->get_result()->fetch_assoc();
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard – Cherish</title>
+  <title>My Replies – Cherish</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-pink-50 font-sans">
@@ -52,14 +52,23 @@ $user = $userQuery->get_result()->fetch_assoc();
 
   <!-- Content -->
   <main class="max-w-3xl mx-auto mt-10 bg-white p-6 rounded-lg shadow">
-    <h2 class="text-2xl font-semibold text-pink-600 mb-2">Welcome, <?= htmlspecialchars($user['name']) ?>!</h2>
-    <p class="text-gray-600 mb-4">Email: <?= htmlspecialchars($user['email']) ?></p>
+    <h2 class="text-2xl font-semibold text-pink-600 mb-4">My Replies</h2>
 
-    <div class="flex flex-col md:flex-row gap-4">
-      <a href="post.html" class="bg-pink-600 text-white px-6 py-2 rounded-full hover:bg-pink-700 text-center">+ Create Post</a>
-      <a href="my_posts.php" class="bg-white border border-pink-600 text-pink-600 px-6 py-2 rounded-full hover:bg-pink-50 text-center">View My Posts</a>
-      <a href="view_reply.php" class="bg-white border border-pink-600 text-pink-600 px-6 py-2 rounded-full hover:bg-pink-50 text-center">View Replies</a>
-    </div>
+    <?php if ($messagesResult->num_rows > 0): ?>
+      <ul class="space-y-4">
+        <?php while ($message = $messagesResult->fetch_assoc()): ?>
+          <li class="bg-white p-4 rounded-lg shadow">
+            <h3 class="font-semibold text-pink-600">Reply to: <?= htmlspecialchars($message['receiver_name']) ?></h3>
+            <p class="text-gray-600 mt-2"><strong>Reply Question 1:</strong> <?= htmlspecialchars($message['reply_q1']) ?></p>
+            <p class="text-gray-600 mt-2"><strong>Reply Question 2:</strong> <?= htmlspecialchars($message['reply_q2']) ?></p>
+            <p class="text-gray-600 mt-2"><strong>Comments:</strong> <?= htmlspecialchars($message['comments']) ?></p>
+            <p class="text-gray-500 mt-2 text-sm">Sent on: <?= htmlspecialchars($message['created_at']) ?></p>
+          </li>
+        <?php endwhile; ?>
+      </ul>
+    <?php else: ?>
+      <p class="text-gray-600">You have no replies yet.</p>
+    <?php endif; ?>
   </main>
 
   <footer class="text-center text-sm text-gray-500 mt-10 mb-4">
