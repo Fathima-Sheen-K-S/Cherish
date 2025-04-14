@@ -70,14 +70,32 @@ $result = $stmt->get_result();
                 <p class="text-gray-800 font-semibold mb-1">
                     <?= htmlspecialchars($reply['sender_name']) ?> replied to you:
                 </p>
-                <div class="text-gray-700">
+                <div class="text-gray-700 mb-3">
                     <p><strong>Reply to Q1:</strong> <?= nl2br(htmlspecialchars($reply['reply_q1'])) ?></p>
                     <p><strong>Reply to Q2:</strong> <?= nl2br(htmlspecialchars($reply['reply_q2'])) ?></p>
                     <p><strong>Comments:</strong> <?= nl2br(htmlspecialchars($reply['comments'])) ?></p>
                 </div>
-                <p class="text-gray-500 text-sm mt-2">
+                <p class="text-gray-500 text-sm mb-3">
                     Sent on <?= date("F j, Y, g:i a", strtotime($reply['created_at'])) ?>
                 </p>
+
+                <!-- Accept & Reject Buttons -->
+                <div class="flex gap-3">
+                    <form action="handle_reply_action.php" method="post">
+                        <input type="hidden" name="message_id" value="<?= $reply['id'] ?>">
+                        <input type="hidden" name="action" value="accept">
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+                            Accept
+                        </button>
+                    </form>
+                    <form action="handle_reply_action.php" method="post">
+                        <input type="hidden" name="message_id" value="<?= $reply['id'] ?>">
+                        <input type="hidden" name="action" value="reject">
+                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                            Reject
+                        </button>
+                    </form>
+                </div>
             </div>
         <?php endwhile; ?>
     <?php else: ?>
