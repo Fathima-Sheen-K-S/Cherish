@@ -74,6 +74,11 @@ $posts_result = $conn->query("SELECT * FROM posts WHERE user_id = $user_id ORDER
             color: #d63384;
             margin: 0;
         }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
         .back-btn {
             padding: 8px 16px;
             background-color: #007bff;
@@ -81,11 +86,13 @@ $posts_result = $conn->query("SELECT * FROM posts WHERE user_id = $user_id ORDER
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            margin-top: 20px;
             text-decoration: none;
         }
         .back-btn:hover {
-            background-color: #0056b3;
+            opacity: 0.9;
+        }
+        .connect-btn {
+            background-color: #28a745;
         }
     </style>
 </head>
@@ -115,7 +122,10 @@ $posts_result = $conn->query("SELECT * FROM posts WHERE user_id = $user_id ORDER
             </div>
         <?php endwhile; ?>
 
-        <a href="browse_post.php" class="back-btn">Back to Posts</a>
+        <div class="button-container">
+            <a href="browse_post.php" class="back-btn">Back to Posts</a>
+            <a href="message_user.php?to=<?= $user_id ?>" class="back-btn connect-btn">Let's Connect</a>
+        </div>
     </div>
 </body>
 </html>
