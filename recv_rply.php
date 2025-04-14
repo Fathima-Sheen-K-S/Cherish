@@ -28,7 +28,7 @@ $query = "
     FROM messages m
     JOIN users u ON m.sender_id = u.id
     JOIN users u2 ON m.receiver_id = u2.id
-    WHERE m.receiver_id = ?  -- Filter by the current user's ID (received messages)
+    WHERE m.receiver_id = ?
     ORDER BY m.created_at DESC
 ";
 $stmt = $conn->prepare($query);
@@ -62,14 +62,22 @@ $result = $stmt->get_result();
 
 <!-- Content -->
 <main class="max-w-3xl mx-auto mt-10 bg-white p-6 rounded-lg shadow">
-    <h2 class="text-2xl font-semibold text-pink-600 mb-2">Replies You Got</h2>
+    <h2 class="text-2xl font-semibold text-pink-600 mb-4">Replies You Got</h2>
 
     <?php if ($result->num_rows > 0): ?>
         <?php while ($reply = $result->fetch_assoc()): ?>
-            <div class="mb-4 p-4 bg-gray-50 border border-pink-200 rounded-lg">
-                <p class="text-gray-800 font-semibold"><?= htmlspecialchars($reply['sender_name']) ?> replied to you:</p>
-                <p class="text-gray-600"><?= htmlspecialchars($reply['comments']) ?></p>
-                <p class="text-gray-500 text-sm mt-2"><?= date("F j, Y, g:i a", strtotime($reply['created_at'])) ?></p>
+            <div class="mb-6 p-4 bg-gray-50 border border-pink-200 rounded-lg">
+                <p class="text-gray-800 font-semibold mb-1">
+                    <?= htmlspecialchars($reply['sender_name']) ?> replied to you:
+                </p>
+                <div class="text-gray-700">
+                    <p><strong>Reply to Q1:</strong> <?= nl2br(htmlspecialchars($reply['reply_q1'])) ?></p>
+                    <p><strong>Reply to Q2:</strong> <?= nl2br(htmlspecialchars($reply['reply_q2'])) ?></p>
+                    <p><strong>Comments:</strong> <?= nl2br(htmlspecialchars($reply['comments'])) ?></p>
+                </div>
+                <p class="text-gray-500 text-sm mt-2">
+                    Sent on <?= date("F j, Y, g:i a", strtotime($reply['created_at'])) ?>
+                </p>
             </div>
         <?php endwhile; ?>
     <?php else: ?>
