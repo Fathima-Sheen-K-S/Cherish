@@ -74,6 +74,11 @@ $posts_result = $conn->query("SELECT * FROM posts WHERE user_id = $user_id ORDER
             color: #d63384;
             margin: 0;
         }
+        .button-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
         .back-btn {
             padding: 8px 16px;
             background-color: #007bff;
@@ -81,11 +86,16 @@ $posts_result = $conn->query("SELECT * FROM posts WHERE user_id = $user_id ORDER
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            margin-top: 20px;
             text-decoration: none;
         }
         .back-btn:hover {
             background-color: #0056b3;
+        }
+        .talk-btn {
+            background-color: #28a745;
+        }
+        .talk-btn:hover {
+            background-color: #1e7e34;
         }
     </style>
 </head>
@@ -101,21 +111,29 @@ $posts_result = $conn->query("SELECT * FROM posts WHERE user_id = $user_id ORDER
 
         <!-- Display the user's posts -->
         <h3>Posts by <?= htmlspecialchars($user['name']) ?>:</h3>
-        <?php while ($post = $posts_result->fetch_assoc()): ?>
-            <div class="post">
-                <h3><?= htmlspecialchars($post['title']) ?></h3>
-                <p><strong>Traits:</strong> <?= nl2br(htmlspecialchars($post['traits'])) ?></p>
-                <p><strong>Lifestyle:</strong> <?= nl2br(htmlspecialchars($post['lifestyle'])) ?></p>
-                <?php if ($post['fun_question1']): ?>
-                    <p><strong>Fun Q1:</strong> <?= htmlspecialchars($post['fun_question1']) ?></p>
-                <?php endif; ?>
-                <?php if ($post['fun_question2']): ?>
-                    <p><strong>Fun Q2:</strong> <?= htmlspecialchars($post['fun_question2']) ?></p>
-                <?php endif; ?>
-            </div>
-        <?php endwhile; ?>
+        <?php if ($posts_result->num_rows > 0): ?>
+            <?php while ($post = $posts_result->fetch_assoc()): ?>
+                <div class="post">
+                    <h3><?= htmlspecialchars($post['title']) ?></h3>
+                    <p><strong>Traits:</strong> <?= nl2br(htmlspecialchars($post['traits'])) ?></p>
+                    <p><strong>Lifestyle:</strong> <?= nl2br(htmlspecialchars($post['lifestyle'])) ?></p>
+                    <?php if ($post['fun_question1']): ?>
+                        <p><strong>Fun Q1:</strong> <?= htmlspecialchars($post['fun_question1']) ?></p>
+                    <?php endif; ?>
+                    <?php if ($post['fun_question2']): ?>
+                        <p><strong>Fun Q2:</strong> <?= htmlspecialchars($post['fun_question2']) ?></p>
+                    <?php endif; ?>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>This user hasn't posted anything yet.</p>
+        <?php endif; ?>
 
-        <a href="browse_post.php" class="back-btn">Back to Posts</a>
+        <!-- Buttons -->
+        <div class="button-row">
+            <a href="browse_post.php" class="back-btn">Back to Posts</a>
+            <a href="message.php?user_id=<?= $user_id ?>" class="back-btn talk-btn">Let's Talk</a>
+        </div>
     </div>
 </body>
 </html>
