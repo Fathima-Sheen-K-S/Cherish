@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start session
+session_start();
 header('Content-Type: application/json');
 
 $servername = "localhost";
@@ -13,7 +13,6 @@ if ($conn->connect_error) {
     die(json_encode(['status' => 'error', 'message' => 'Database connection failed.']));
 }
 
-// Read JSON input
 $data = json_decode(file_get_contents("php://input"));
 if (!isset($data->email) || !isset($data->password)) {
     echo json_encode(['status' => 'error', 'message' => 'Email and password are required.']);
@@ -21,27 +20,52 @@ if (!isset($data->email) || !isset($data->password)) {
 }
 
 $email = $conn->real_escape_string($data->email);
-$password = $conn->real_escape_string($data->password);
+$password_input = $conn->real_escape_string($data->password);
 
-// Query user
-$sql = "SELECT * FROM users WHERE email = '$email'";
-$result = $conn->query($sql);
+// Admin login
+$sql_admin = "SELECT * FROM admin WHERE email = '$email'";
+$result_admin = $conn->query($sql_admin);
 
-if ($result->num_rows > 0) {
-    $user = $result->fetch_assoc();
-    
-    // If password stored as plain text:
-    if ($user['password'] === $password) {
-        // Store user ID in session
-        $_SESSION['user_id'] = $user['id'];
-        
+if ($result_admin->num_rows > 0) {
+    $admin = $result_admin->fetch_assoc();
+    if ($admin['password'] === $password_input) { // Use hashed passwords in production!
+        $_SESSION['admin_id'] = $admin['id'];
+        $_SESSION['role'] = 'admin';
         echo json_encode([
             'status' => 'success',
-            'message' => 'Login successful!',
+            'message' => 'Admin login successful!',
+            'redirect' => 'admin/admin_dashboard.php',
+            'user' => [
+                'id' => $admin['id'],
+                'email' => $admin['email'],
+                'role' => 'admin'
+            ]
+        ]);
+        exit();
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Invalid admin password.']);
+        exit();
+    }
+}
+
+// User login
+$sql_user = "SELECT * FROM users WHERE email = '$email'";
+$result_user = $conn->query($sql_user);
+
+if ($result_user->num_rows > 0) {
+    $user = $result_user->fetch_assoc();
+    if ($user['password'] === $password_input) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['role'] = 'user';
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'User login successful!',
+            'redirect' => 'view.php',
             'user' => [
                 'id' => $user['id'],
                 'name' => $user['name'],
-                'email' => $user['email']
+                'email' => $user['email'],
+                'role' => 'user'
             ]
         ]);
     } else {

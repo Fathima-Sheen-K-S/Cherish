@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <title>Reverse Matrimony - Login</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       display: flex;
@@ -94,42 +92,30 @@
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
+      e.preventDefault();
 
-  // Collect form data
-  const formData = Object.fromEntries(new FormData(this));
-  console.log("Form Data:", formData); // Log the form data
+      const formData = Object.fromEntries(new FormData(this));
 
-  try {
-    // Send the request
-    const res = await fetch('login.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+      try {
+        const res = await fetch('login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+
+        if (data.status === 'success') {
+          alert(data.message);
+          window.location.href = data.redirect; // Dynamic redirect based on role
+        } else {
+          alert(data.message);
+        }
+      } catch (err) {
+        console.error('Login error:', err);
+        alert('Something went wrong. Please try again later.');
+      }
     });
-
-    // Check if the response status is OK
-    if (!res.ok) {
-      throw new Error('Network response was not ok.');
-    }
-
-    // Parse the JSON response
-    const data = await res.json();
-    console.log("Response Data:", data); // Log the response data
-
-    // Check the response status
-    if (data.status === 'success') {
-      alert(data.message);
-      window.location.href = 'view.php'; // Redirect on successful login
-    } else {
-      alert(data.message); // Show the error message returned from PHP
-    }
-  } catch (err) {
-    console.error('Login error:', err);
-    alert('Something went wrong. Please try again later.'); // Generic error message
-  }
-});
-
   </script>
 </body>
 </html>
