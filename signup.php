@@ -36,7 +36,8 @@ if ($checkQuery->num_rows > 0) {
   $stmt->bind_param("sssssss", $name, $email, $password, $gender, $lookingFor, $ageMin, $ageMax);
 
   if ($stmt->execute()) {
-    echo "Registration successful!";
+    header("Location: thankyou.html");
+    exit();
   } else {
     echo "Error: " . $stmt->error;
   }
