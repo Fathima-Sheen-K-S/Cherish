@@ -146,8 +146,6 @@
     const errorMessage = document.getElementById('errorMessage');
 
     form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Always stop form first
-
       const email = emailInput.value.trim();
       const password = passwordInput.value.trim();
       const ageMin = parseInt(ageMinInput.value.trim(), 10);
@@ -157,29 +155,24 @@
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
       if (!emailRegex.test(email)) {
+        event.preventDefault();
         errorMessage.textContent = "Please enter a valid email address.";
         return;
       }
 
       if (!passwordRegex.test(password)) {
+        event.preventDefault();
         errorMessage.textContent = "Password must be at least 8 characters long and include uppercase, lowercase, and a number.";
         return;
       }
 
       if (isNaN(ageMin) || isNaN(ageMax) || ageMin > ageMax) {
+        event.preventDefault();
         errorMessage.textContent = "Please enter a valid age range (min ≤ max).";
         return;
       }
 
       errorMessage.textContent = "";
-
-      // Simulate successful registration
-      alert("Registration successful!");
-
-      // Redirect to login after 1 second
-      setTimeout(() => {
-        window.location.href = "login.html";
-      }, 1000);
     });
   </script>
 </body>
