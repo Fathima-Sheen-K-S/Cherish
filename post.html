@@ -13,6 +13,32 @@
       align-items: center;
       height: 100vh;
       margin: 0;
+      position: relative;
+    }
+
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #ff69b4;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5rem; /* 👈 Bigger arrow */
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .back-arrow:hover {
+      background-color: #ff85c1;
+      transform: scale(1.05);
     }
 
     .form-container {
@@ -22,6 +48,7 @@
       box-shadow: 0 4px 20px rgba(255, 192, 203, 0.4);
       max-width: 500px;
       width: 100%;
+      position: relative;
     }
 
     h2 {
@@ -39,6 +66,7 @@
       background: #fff9fb;
       font-size: 1rem;
     } 
+
     button {
       width: 100%;
       padding: 0.7rem;
@@ -49,13 +77,15 @@
       font-size: 1rem;
       cursor: pointer;
     }
-    
+
     button:hover {
       background: #ff85c1;
     }
   </style>
 </head>
 <body>
+  <a class="back-arrow" onclick="history.back()">&#x2190;</a> <!-- ← Bigger White Arrow -->
+
   <div class="form-container">
     <h2>Create Your Post</h2>
     <form method="POST" action="submit_post.php">
