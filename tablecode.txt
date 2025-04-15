@@ -62,3 +62,7 @@ CREATE TABLE messages (
     comments TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+ALTER TABLE messages ADD COLUMN status VARCHAR(20) NOT NULL DEFAULT 'Pending';
+
