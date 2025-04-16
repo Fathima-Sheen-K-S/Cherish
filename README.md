@@ -9,7 +9,7 @@ Cherish is an inclusive and modern Reverse Matrimony platform where users create
 - ✅ Applicants apply to partner requirement posts
 - ✅ Fun challenges and personality-based questions
 - ✅ Inclusive for all genders and sexual orientations (LGBTQ+ friendly)
-- ✅ Secure messaging after match acceptance
+- ✅ Secure messaging
 
 
 
